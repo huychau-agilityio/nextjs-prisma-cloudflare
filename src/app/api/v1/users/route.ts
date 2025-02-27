@@ -3,7 +3,7 @@ import { dbClient } from '@/server/databases/client';
 
 export const runtime = 'edge';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
 
   const db = await dbClient();
 

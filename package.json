@@ -7,14 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pages:build": "npx @cloudflare/next-on-pages@1",
+    "pages:build": "pnpm dlx @cloudflare/next-on-pages",
     "db:generate": "prisma generate --schema=src/server/databases/schema.prisma",
     "db:apply": "npx wrangler d1 migrations apply"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250224.0",
     "@prisma/adapter-d1": "^6.4.1",
-    "@prisma/client": "^6.4.1",
+    "@prisma/client": "^6.3.1",
     "next": "15.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
