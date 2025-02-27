@@ -8,7 +8,7 @@ export async function GET() {
   const db = await dbClient();
 
   try {
-    const users = await db.User.findMany();
+    const users = await db.user.findMany();
     return NextResponse.json(users);
   } catch {
     return NextResponse.json({ error: 'Failed to fetch users' }, { status: 500 });
