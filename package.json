@@ -9,7 +9,7 @@
     "lint": "next lint",
     "pages:build": "pnpm dlx @cloudflare/next-on-pages",
     "db:generate": "prisma generate --schema=src/server/databases/schema.prisma",
-    "db:apply": "npx wrangler d1 migrations apply"
+    "db:migrate": "npx wrangler d1 migrations apply"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20250224.0",

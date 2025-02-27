@@ -4,15 +4,8 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 
 
 export const dbClient = async () => {
-  let db;
+  const env = getRequestContext().env as CloudflareEnv;
 
-  if (process.env.NODE_ENV === 'development') {
-    const env = getRequestContext().env as CloudflareEnv;
-    db = env.DB
-  } else {
-    db = process.env.DB as unknown as D1Database
-  }
-
-  const adapter = new PrismaD1(db)
+  const adapter = new PrismaD1(env.DB)
   return new PrismaClient({ adapter })
 }
