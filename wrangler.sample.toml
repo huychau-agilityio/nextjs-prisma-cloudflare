@@ -1,0 +1,10 @@
+name = "nextjs-prisma-cloudflare"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "sample-local-database"
+database_id = "sample-id"
+migrations_dir = "./src/server/databases/migrations"

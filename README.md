@@ -1,38 +1,92 @@
 # Next.js + TailwindCSS + TypeScript + Prisma + Cloudflare D1
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a modern web application stack using Next.js, TailwindCSS, TypeScript, Prisma, and Cloudflare D1 for database management. It is optimized for edge deployment on Cloudflare Pages.
 
-## Getting Started
+🚀 Features
 
-First, run the development server:
+- Next.js: Server-side rendering, API routes, and static site generation.
+- TailwindCSS: Utility-first CSS framework for rapid UI development.
+- TypeScript: Strongly typed JavaScript for better developer experience.
+= Prisma: Modern database ORM with type-safe queries.
+- Cloudflare D1: Serverless SQL database for scalable applications.
+- Edge Runtime: Optimized for Cloudflare Pages and Workers
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+## 🛠 Setup & Installation
+
+### Install Dependencies
+```
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Create Cloudflare D1 Database
+```
+npx wrangler d1 create sample-local-database
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Config `wrangler.toml` (create new if not already)
+```
+name = "nextjs-prisma-cloudflare"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "sample-local-database"
+database_id = "sample-id"
+migrations_dir = "./src/server/databases/migrations"
+```
 
-## Learn More
+### Migrate database
+```
+pnpm db:migrate <database-name> --local
+```
 
-To learn more about Next.js, take a look at the following resources:
+- --remote for cloud
+- --local for local development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Run local server
+```
+pnpm dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🌍 Deployment (Cloudflare Pages)
+This deployment does not push `wrangler.toml` to the repository.
 
-## Deploy on Vercel
+You can create Cloudflare Page by connecting to your Git repository.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Migrate database
+*Note: This will manually for now. We need migrate for cloud environment use Terminal.*
+```
+pnpm db:migrate <database-name> --remote
+```
+
+## Build command
+```
+pnpm pages:build
+```
+
+## Binding Database
+
+Settings -> Bindings -> Add -> D1 Database. Set name is `DB` and select your database name.
+
+
+## 🔥 API Routes
+
+`GET /api/users`
+
+Fetch all users from the database.
+
+`POST /api/users`
+
+Create a new user.
+
+Example Request Body:
+```
+{
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+```
