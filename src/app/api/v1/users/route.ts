@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
   const db = await dbClient();
 
   try {
-    const user = await db.User.create({ data: body });
+    const user = await db.user.create({ data: body });
     return NextResponse.json(user);
   } catch {
     return NextResponse.json({ 
