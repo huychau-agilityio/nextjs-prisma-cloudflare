@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { dbClient } from '@/server/databases/client';
+import { Prisma } from '@prisma/client/edge';
 
 export const runtime = 'edge';
 
@@ -16,8 +17,14 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
   const db = await dbClient();
+
+   // Ensure body is correctly typed
+   const body: Prisma.UserCreateInput = await req.json();
+
+   if (!body.email || !body.name) {
+     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+   }
 
   try {
     const user = await db.user.create({ data: body });
