@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Prisma as DBType } from '@prisma/client/edge'
 import { PrismaD1 } from '@prisma/adapter-d1'
 import { getRequestContext } from '@cloudflare/next-on-pages';
 
@@ -9,3 +9,5 @@ export const dbClient = async () => {
   const adapter = new PrismaD1(env.DB)
   return new PrismaClient({ adapter })
 }
+
+export { DBType }

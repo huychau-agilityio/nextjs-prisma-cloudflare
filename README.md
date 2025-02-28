@@ -75,11 +75,11 @@ Settings -> Bindings -> Add -> D1 Database. Set name is `DB` and select your dat
 
 ## 🔥 API Routes
 
-`GET /api/users`
+`GET /api/v1/users`
 
 Fetch all users from the database.
 
-`POST /api/users`
+`POST /api/v1/users`
 
 Create a new user.
 
