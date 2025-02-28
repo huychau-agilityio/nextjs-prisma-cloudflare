@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma as DBType } from '@prisma/client/edge'
+import { PrismaClient, Prisma as DBType } from '@prisma/client'
 import { PrismaD1 } from '@prisma/adapter-d1'
 import { getRequestContext } from '@cloudflare/next-on-pages';
 
